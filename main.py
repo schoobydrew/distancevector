@@ -28,14 +28,18 @@ def distance_vector(topology):
     # iterate through nodes
     for node in topology:
         dv[node] = {n:{"cost":c, "path":node+n} for n,c in topology[node].items()}
+    # make multiple passes
     for i in range(len(dv)-1):
+        # iterate through nodes
         for node in dv:
+            # iterate through targets
             for d in dv[node]:
+                # compare target cost to other reported costs
                 for n in dv:
                     if (dv[node][d]["cost"] > dv[node][n]["cost"] + dv[n][d]["cost"]):
                         dv[node][d]["cost"] = dv[node][n]["cost"] + dv[n][d]["cost"]
                         dv[node][d]["path"] = dv[node][n]["path"] + dv[n][d]["path"]
-    print(dv)
+    return dv
 if __name__ == "__main__":
     # arg parser
     ap = argparse.ArgumentParser()
@@ -44,4 +48,5 @@ if __name__ == "__main__":
     args = vars(ap.parse_args())
     # load in topology from command line
     data_frame = load_topology(args["filepath"])
-    distance_vector(data_frame)
+    dv_frame = distance_vector(data_frame)
+    print(dv_frame)
