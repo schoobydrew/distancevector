@@ -38,7 +38,7 @@ def distance_vector(topology):
                 for n in dv:
                     if (dv[node][d]["cost"] > dv[node][n]["cost"] + dv[n][d]["cost"]):
                         dv[node][d]["cost"] = dv[node][n]["cost"] + dv[n][d]["cost"]
-                        dv[node][d]["path"] = dv[node][n]["path"] + dv[n][d]["path"]
+                        dv[node][d]["path"] = dv[node][n]["path"][:-1] + dv[n][d]["path"]
     return dv
 if __name__ == "__main__":
     # arg parser
