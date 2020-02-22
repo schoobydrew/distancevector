@@ -1,5 +1,5 @@
 # Andrew Schoonmaker and Andre Aguillard
-# Dijkstra algorithm in python 3
+# Distance vector algorithm in python 3
 #!/usr/bin/env python3
 import argparse
 # load_topology
@@ -19,6 +19,23 @@ def load_topology(filepath):
         weights = row[1:]
         frame[node] = {n:int(w) for n,w in zip(nodes,weights)}
     return frame
+# distance_vector
+# parameters: data frame of topology
+# returns: data frame of updated topology and paths
+def distance_vector(topology):
+    # initialize distance vector updated topology
+    dv = {}
+    # iterate through nodes
+    for node in topology:
+        dv[node] = {n:{"cost":c, "path":node+n} for n,c in topology[node].items()}
+    for i in range(len(dv)-1):
+        for node in dv:
+            for d in dv[node]:
+                for n in dv:
+                    if (dv[node][d]["cost"] > dv[node][n]["cost"] + dv[n][d]["cost"]):
+                        dv[node][d]["cost"] = dv[node][n]["cost"] + dv[n][d]["cost"]
+                        dv[node][d]["path"] = dv[node][n]["path"] + dv[n][d]["path"]
+    print(dv)
 if __name__ == "__main__":
     # arg parser
     ap = argparse.ArgumentParser()
@@ -27,3 +44,4 @@ if __name__ == "__main__":
     args = vars(ap.parse_args())
     # load in topology from command line
     data_frame = load_topology(args["filepath"])
+    distance_vector(data_frame)
