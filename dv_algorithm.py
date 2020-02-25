@@ -52,6 +52,6 @@ if __name__ == "__main__":
     # Format the output and print to standard out
     # reference the source below for accessing nested dictionaries
     # source: https://www.learnbyexample.org/python-nested-dictionary/
-    print("Distance vector for node x: {} {} {}".format(dv_frame['x']['x']['cost'],dv_frame['x']['y']['cost'],dv_frame['x']['z']['cost']))
-    print("Distance vector for node y: {} {} {}".format(dv_frame['y']['x']['cost'],dv_frame['y']['y']['cost'],dv_frame['y']['z']['cost']))
-    print("Distance vector for node z: {} {} {}".format(dv_frame['z']['x']['cost'],dv_frame['z']['y']['cost'],dv_frame['z']['z']['cost']))
+    for n in dv_frame:
+        weights = " ".join([str(dv_frame[n][t]["cost"]) for t in dv_frame[n]])
+        print("Distance vector for node {}: {}".format(n,weights))
