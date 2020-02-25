@@ -25,9 +25,9 @@ Distance vector for node z: 3 1 0
 
 ### Python Version
 The program is run using Python 3.
-    Andre used Python 3.6.8
-    Andrew used
+    Andre used Python 3.6
+    Andrew used Python 3.6
 
 ### Member Responsibilities
-Andre Aguillard formated the output of the file and created the README.
+Andre Aguillard formatted the output of the file and created the README.
 Andrew Schoonmaker implemented the dv algorithm and the load topology functions.
